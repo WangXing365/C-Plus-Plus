@@ -148,3 +148,82 @@ void InsertNode(LinkList head,ListNode *p)
 	 p1->next=p; //插入p所指向的结点
 	 p->next=p2; //连接表中剩余部分 
  } 
+ 
+/********************/
+/* 通讯录结点的查找 */
+/********************/
+ListNode *ListFind(LinkList head)
+{
+	ListNode *p;
+	char num [5];
+	char name [9];
+	int xz;
+	printf("============================\n");
+	printf("1.按编号查询\n");
+	printf("2.按姓名查询\n");
+	printf("============================\n");
+	printf(" 请选择 ");
+	p=head->next;
+	scanf("%d",&xz);
+	if (xz=1)
+	{
+		printf("请输入要查询的编号"：);
+		scanf("%s",num);
+		while(p&&strcmp(p->data.num,num)<0)
+		p=p->next;
+		if (p==NULL||strcmp(p->data.num,num)>0)
+		p=NULL; 
+	 } 
+	 else
+	 if (xz==2)
+	 {
+	 	printf("请输入要查找的姓名：");
+		scanf("%s",name);
+		while(p&&strcmp(p->data.name,name)!=0)
+		p=p=>next; 
+	 }
+	 return p;
+ }
+ 
+/********************/
+/* 通讯录结点的删除 */
+/********************/
+void DelNode(LinkList head)
+{
+	char jx;
+	ListNode *p,*q;
+	p=ListFind(head); //调用查找函数
+	if (p==NULL)
+	{
+		printf("没有查找到要删除的通讯者！\n");
+		return;
+	 }
+	 printf("确定要删除该通讯者？(y/n):");
+	 scanf("%c",&jx);
+	 if (jx=='y'||jx=='Y')
+	 {
+	 	q=head;
+	 	while(p!=NULL&&q->next!=p)
+	 	q=q->next;
+	 	q->next=p->next; //删除结点
+		free(p); //释放被删除的结点
+		printf("通讯者已经被删除！\n");		 
+	  } 
+ }
+ 
+/********************/
+/* 通讯录链表的输出 */
+/********************/
+void PrintList(LinkList head)
+{
+	ListNode *p;
+	p=head->next; //使p指向第一个结点
+	printf("编号 姓名 性别 联系电话 地址 \n");
+	printf("-----------------------------------------\n");
+	while(p!=NULL)
+	{
+		printf("%s%s%s%s%s",p->data.num,p->data.name,p->data.sex,p->data.phone,p->data.addr);
+		printf("-------------------------------------\n");
+		p=p->next; //后移一个结点 
+	 } 
+}
