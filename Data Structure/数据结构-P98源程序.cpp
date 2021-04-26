@@ -121,3 +121,69 @@ int IndexKMP(SString s,SString t,int pos,int next[])
 	return k; 
 }
 //--------------------文本文件单词的检索与计数---------------------
+int match(char a[],int n,char c)
+{
+	int i;
+	for(i=0;i<n;i++)
+	if(a[i]==c)return 1;
+	return 0;
+}
+void CreatTextFile()
+{
+	SString s;
+	char fname[10],yn;
+	FILE *fp;
+	printf("请输入要建立的文件名：");
+	scanf("%s",fname);
+	fp=fopen(fname,"w");
+	yn='n'; //输入结束标志初值
+	while(yn=='n'||yn=='N')
+	{
+		printf("请输入一行文本：")
+		gets(s.ch);gets(s.ch);
+		s.length=strlen(s.ch);
+		fwrite(&s,s.length,1,fp);
+		fprintf(fp,"%c",10);
+		printf("结束输入吗？y/n:");yn=getchar(); 
+	 }
+	 fclose(fp); //关闭文件
+	 printf("建立文件结束！"); 
+}
+void SubStrCount()
+{
+	char a[7]={',','.',';','!','?','','\n'};
+	FILE *fp;
+	SString s,t; /*定义两个串变量*/
+	char fname[10];
+	int i=0,j,k;
+	printf("请输入文件名：");
+	scanf("%s",fname);
+	fp=fopen(fname,"r");
+	printf("请输入要统计的单词：");
+	scanf("%s",t.ch);
+	t.length=strlen(t.ch);
+	while(!feof(fp)) /*扫描整个文本文件*/
+	{
+		memset(s.ch,'\0',256);
+		fgets(s.ch,256,fp); /*读入一行文本*/
+		s.length=strlen(s.ch);
+		k=0; /*初始化开始检索位置*/
+		while(k<s.length-1) /*检索整个主串s*/
+		{
+		j=IndexBF(s,t,k); /*调用串匹配函数*/
+		if(j<0)break;
+		else if(j==0)
+		{
+			if(match(a,7,s.ch [t.length]))
+			i++; /*单词计数器加1*/
+			k=j+t.length; /*继续下一字串的检索*/ 
+		 }
+		 else
+		 {
+		 	if(match(a,7,s.ch[j-1])&&match(a,7,s.ch [j+t.length]))
+		 	i++; /*单词计数器加1*/ 
+		 	k=j+s.length; /*继续下一字串的检索*/ 
+		} 
+	} 
+} printf("\n单词%s在文本文件%s中共出现%d次\n",t.ch,fname,i);
+}
