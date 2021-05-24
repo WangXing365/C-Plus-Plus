@@ -187,3 +187,81 @@ void SubStrCount()
 	} 
 } printf("\n单词%s在文本文件%s中共出现%d次\n",t.ch,fname,i);
 }
+void SubStrInd() /*检索单词出现在文本文件中的行号、次数及位置*/
+{
+	char a[7]={',','.',';','!','?','','\n'};
+	FILE *fp;
+	SString s,t;
+	char fname[10];
+	int i,j,k,l,m;
+	int wz[20];
+	printf("输入文本文件名：");
+	scanf("%s",fname);
+	fp=fopen(fname,"r");
+	printf("输入要检索的单词：");
+	scanf("%s",t.ch);
+	t.length=strlen(t.ch);
+	l=0;
+	while(!feof(fp))
+	{
+		memset(s.ch,'\0',256);
+		fgets(s.ch,256,fp);
+		s.length=strlen(s.ch);
+		l++;
+		k=0;
+		i=0;
+		while(k<s.length-1)
+		{
+			j=IndexBF(s,t,k);
+			if(j<0)break;
+			else if(j==0)
+			{
+				if(match(a,7,s.ch[t.length]))
+				{
+					i++;
+					wz[i]=j;
+				}
+				k=j+t.length;
+			}
+		}
+		else
+		{
+		if(match(a,7,s.ch[j-1])&&match(a,7,s.ch[j+t.length]))
+		{
+			i++;
+			wz[i]=j;
+		}
+		k=j+t.length;
+		}
+	}
+	if(i>0)
+	{
+		printf("行号：%d，次数：%d，位置分别为：",l,i);
+		for(m=1;m<=i;m++)
+		printf("%4d",wz[m]+1);
+		printf("\n");
+	}
+}
+main()
+{
+	SString s,t,m;
+	int xz,wz;
+	int next[MaxStrSize];
+	char a[MaxStrSize],b[MaxStrSize];
+	do
+	{
+		printf("\n");
+		printf("***************************\n");
+		printf("***************************\n");
+		printf("*1.KMP算法和BF算法        *\n");
+		printf("*2.建立文本文件           *\n");
+		printf("*3.单词字串的计数         *\n");
+		printf("*4.单词字串的定位         *\n");
+		printf("*0.退出整个程序           *\n");
+		printf("%d",%xz);
+		switch(xz)
+		{
+			case 1:
+		}
+	}
+}
