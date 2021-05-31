@@ -262,6 +262,25 @@ main()
 		switch(xz)
 		{
 			case 1:
+				printf("\n请输入主串s：");
+				gets(a);
+				printf("\n请输入模式串t：");
+				gets(b);
+				InitString(&s,a);
+				InitString(&t,b);
+				printf("\n主串S:");show(s);
+				printf("\n模式串T:");show(t);
+				printf("\n请输入开始匹配的下标：");
+				scanf("%d",&wz);
+				printf("\nBF算法匹配位置：%d",IndexBF(s,t,wz)+1);
+				get_next(t,next);
+				printf("\nKMP算法匹配位置：%d",IndexKMP(s,t,wz,next)+1);
+				break;
+			case 2:CreakTextFile();break;
+			case 3:SubStrCount();break;
+			case 4:SubStrInd();break;
+			case 0:return 0;
+			default:printf("选择错误，请重新选择\n");
 		}
-	}
+	}while(1);
 }
